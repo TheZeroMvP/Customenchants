@@ -69,18 +69,20 @@ class ChestInventory extends ContainerInventory {
     }
 
     public function onClose(Player $who) : void {
-        parent::onClose($who);
-        // Real block
-        $packet = new UpdateBlockPacket();
-        $packet->x = $this->holder->x;
-        $packet->y = $this->holder->y;
-        $packet->z = $this->holder->z;
-        $packet->blockRuntimeId = $who->getLevel()->getBlock($this->holder)->getRuntimeId();
-        $packet->flags = UpdateBlockPacket::FLAG_NETWORK;
-        $who->dataPacket($packet);
-        $closeCallback = $this->getCloseCallback();
-        if ($closeCallback !== null){
-            $closeCallback($who, $this);
+        if (isset($this->viewers[spl_object_hash($who)])){
+            parent::onClose($who);
+            // Real block
+            $packet = new UpdateBlockPacket();
+            $packet->x = $this->holder->x;
+            $packet->y = $this->holder->y;
+            $packet->z = $this->holder->z;
+            $packet->blockRuntimeId = $who->getLevel()->getBlock($this->holder)->getRuntimeId();
+            $packet->flags = UpdateBlockPacket::FLAG_NETWORK;
+            $who->dataPacket($packet);
+            $closeCallback = $this->getCloseCallback();
+            if ($closeCallback !== null){
+                $closeCallback($who, $this);
+            }
         }
     }
 
