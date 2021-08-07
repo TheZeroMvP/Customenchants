@@ -3,7 +3,7 @@ Simple Inventory API for Pocketmine
 
 ## How to Install
 1) Install devtools
-2) Upload the InventoryAPI folder in your plugins folder
+2) Upload the InventoryAPI source code in your plugins folder
 3) Restart
 
 ## Types
