@@ -7,33 +7,35 @@ use pocketmine\inventory\transaction\action\SlotChangeAction;
 use pocketmine\plugin\PluginBase;
 
 use pocketmine\event\Listener;
-use SonsaYT\InventoryAPI\inventory\ChestInventory;
-use SonsaYT\InventoryAPI\inventory\DoubleChestInventory;
+use SonsaYT\InventoryAPI\block\inventory\ChestInventory;
+use SonsaYT\InventoryAPI\block\inventory\DoubleChestInventory;
 
 class Main extends PluginBase implements Listener {
 
-    public function onEnable(){
+    public function onEnable() : void {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
     }
 
-    public function createChestGUI(){
+    public function createChestGUI() {
         return new ChestInventory($this);
     }
 
-    public function createDoubleChestGUI(){
+    public function createDoubleChestGUI() {
         return new DoubleChestInventory($this);
     }
 
-    public function onInventoryTransaction(InventoryTransactionEvent $event) : void{
+    public function onInventoryTransaction(InventoryTransactionEvent $event) : void {
         $transaction = $event->getTransaction();
         $player = $transaction->getSource();
-        foreach ($transaction->getActions() as $action){
-            if ($action instanceof SlotChangeAction){
+        foreach ($transaction->getActions() as $action) {
+            if ($action instanceof SlotChangeAction) {
                 $inventory = $action->getInventory();
-                if ($inventory instanceof ChestInventory){
-                    $event->setCancelled($inventory->isViewOnly());
+                if ($inventory instanceof ChestInventory) {
+                    if ($inventory->isViewOnly()) {
+                        $event->cancel();
+                    }
                     $clickCallback = $inventory->getClickCallback();
-                    if ($clickCallback !== null){
+                    if ($clickCallback !== null) {
                         $clickCallback($player, $inventory, $action->getSourceItem(), $action->getTargetItem(), $action->getSlot());
                     }
                 }

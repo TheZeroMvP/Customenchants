@@ -2,9 +2,9 @@
 
 namespace SonsaYT\InventoryAPI\task;
 
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
-use SonsaYT\InventoryAPI\inventory\ChestInventory;
+use SonsaYT\InventoryAPI\block\inventory\ChestInventory;
 
 class DelayTask extends Task {
 
@@ -16,8 +16,8 @@ class DelayTask extends Task {
         $this->inventory = $inventory;
     }
 
-    public function onRun(int $currentTick) {
-        $this->player->addWindow($this->inventory);
+    public function onRun() :void {
+        $this->player->setCurrentWindow($this->inventory);
     }
 
 }

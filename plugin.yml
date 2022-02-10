@@ -1,5 +1,5 @@
 name: InventoryAPI
 main: SonsaYT\InventoryAPI\Main
-api: [3.22.0]
+api: [4.0.0]
 version: 1.0
 author: SonsaYT
