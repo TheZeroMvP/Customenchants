@@ -16,7 +16,7 @@ class DelayTask extends Task {
         $this->inventory = $inventory;
     }
 
-    public function onRun() :void {
+    public function onRun() : void {
         $this->player->setCurrentWindow($this->inventory);
     }
 
