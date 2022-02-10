@@ -15,14 +15,14 @@ Simple Inventory API for Pocketmine
 ## Example
 ```php
 
-  public function onEnable(){
+  public function onEnable() : void {
     $this->inventoryApi = $this->getServer()->getPluginManager()->getPlugin("InventoryAPI");
   }
 
   public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
     switch ($command){
       case "test":
-        if ($sender instanceof Player){
+        if ($sender instanceof Player) {
           $this->openMyChest($sender);
         }
       break;
@@ -30,7 +30,7 @@ Simple Inventory API for Pocketmine
     return true;
   }
 
-  public function openMyChest(Player $player){
+  public function openMyChest(Player $player) {
     $inventory = $this->inventoryApi->createChestGUI(); // Single chest
     $inventory->setName("Test Chest UwU"); // Set name
     $inventory->setViewOnly(); // Prevent user from getting the item
@@ -42,11 +42,11 @@ Simple Inventory API for Pocketmine
     $inventory->send($player); // Send inventory to user
   }
 
-  public function clickFunction(Player $player, Inventory $inventory, Item $source, Item $target, int $slot){
+  public function clickFunction(Player $player, Inventory $inventory, Item $source, Item $target, int $slot) {
     // Your logic
   }
 
-  public function closeFunction(Player $player, Inventory $inventory){
+  public function closeFunction(Player $player, Inventory $inventory) {
     // Your logic
   }
 
