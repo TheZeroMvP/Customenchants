@@ -34,9 +34,11 @@ Simple Inventory API for Pocketmine
     $inventory = $this->inventoryApi->createChestGUI(); // Single chest
     $inventory->setName("Test Chest UwU"); // Set name
     $inventory->setViewOnly(); // Prevent user from getting the item
-    $inventory->addItem(Item::get(5, 0, 1)); // Add item
-    $inventory->addItem(Item::get(17, 0, 1)); // Add item
-    $inventory->setItem(9, Item::get(5, 0, 1)); // Set item
+    $item = VanillaItems::COMPASS();
+    $item->setCustomName("Hub Item");
+    $inventory->addItem($item); // Add item
+    $inventory->addItem($item); // Add item
+    $inventory->setItem(9, $item); // Set item
     $inventory->setClickCallback([$this, "clickFunction"]); // Add click callback
     $inventory->setCloseCallback([$this, "closeFunction"]); // Add close callback
     $inventory->send($player); // Send inventory to user
