@@ -1,5 +1,5 @@
-name: InventoryAPI
-main: SonsaYT\InventoryAPI\Main
+name: Customenchants 
+main: TheZero
 api: [4.0.0]
-version: 1.0
-author: SonsaYT
+version: 0.0.1
+author: TheZero#1618
